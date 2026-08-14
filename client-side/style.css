@@ -121,7 +121,7 @@ body {
     top: 50%;
     left: 50%;
     
-    /* 2. Set the size */
+    /* 2. Setting the size */
     width: 450px;
     height: 450px;
     
@@ -133,7 +133,7 @@ body {
     object-fit: cover;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
     
-    /* Prepping for your future JS rotation! This makes them glide. */
+    /* Prepping for future JS rotation! This makes them glide. */
     transition: all 0.5s ease-in-out; 
 }
 
@@ -159,7 +159,7 @@ body {
 
 .glass-panel{
     position: relative;
-    z-index: 10; /* Ensure the glass panel is above the album stack */
+    z-index: 10; /* Ensuring the glass panel is above the album stack */
 
     background: rgba(30, 30, 30, 0.45);
     backdrop-filter: blur(10px);
