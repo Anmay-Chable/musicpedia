@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicpedia | Home</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation bar-->
+    <nav class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="about.html">About</a>
+        <a href="details.html">Entry Details</a>
+    </nav>
+
+    <main class="hero-section">
+
+<!-- The Horizontal 3D Album Stack (temporary stock photos for now) -->
+        <div class="album-stack">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500" class="album-cover album-left" alt="Album 1">
+            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500" class="album-cover album-center" alt="Album 2">
+            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500" class="album-cover album-right" alt="Album 3">
+        </div>
+        
+        <!-- Glass Panel -->
+        <div class="glass-panel">
+            <h1 class="logo-title">Welcome to Musicpedia</h1>
+            <form class="search-form" action="/browse">
+                <span class="search-icon">&#128269;</span>
+                <input type="text" placeholder="Search for music..." class="search-input" name="search">
+            </form>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
