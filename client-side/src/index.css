@@ -1,0 +1,278 @@
+:root {
+    --bg-primary: #121212;
+    --bg-surface: #282828;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --accent-green: #1db954;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- 1. NAVIGATION --- */
+.top-nav {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2rem;
+    position: relative;
+    z-index: 1000;
+}
+
+.top-nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.top-nav a:hover {
+    color: var(--accent-green);
+}
+
+/* --- 2. HERO/HOME SECTION --- */
+.hero-section {
+    flex: 1; /* Stretches to fill the remaining screen space */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden; /* Prevents page scrolling if albums move off-screen */
+}
+
+.logo-title {
+    font-size: 3.5rem;
+    letter-spacing: -2px;
+    margin-bottom: 2rem;
+}
+
+/* --- 3. SEARCH BAR --- */
+.search-form {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-surface);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid transparent;
+    transition: border 0.3s ease;
+}
+
+.search-form:focus-within {
+    border: 1px solid var(--text-secondary);
+}
+
+.search-icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.search-input {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    padding: 0.8rem;
+    width: 100%;
+    font-size: 1.1rem;
+    outline: none;
+}
+
+/* --- 4. GLASS PANEL --- */
+.glass-panel {
+    position: relative;
+    z-index: 10;
+    background: rgba(30, 30, 30, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 3rem 4rem;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- 5. 3D ALBUM STACK --- */
+.album-stack {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    z-index: 1;
+}
+
+.album-cover {
+    /* Pinned to the exact center of the hero section */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+    /* Dimensions */
+    width: 450px;
+    height: 450px;
+    
+    /* Pulled back by exactly half their size */
+    margin-top: -225px; 
+    margin-left: -225px; 
+    
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    transition: all 0.5s ease-in-out; 
+}
+
+.album-left {
+    transform: translateX(-250px) scale(0.85); 
+    opacity: 0.6;
+    z-index: 1;
+}
+
+.album-center {
+    transform: translateX(0) scale(1.1); 
+    opacity: 0.9;
+    z-index: 3;
+}
+
+.album-right {
+    transform: translateX(250px) scale(0.85); 
+    opacity: 0.6;
+    z-index: 1;
+}
+
+/* =========================
+    6. Browse Page Styles (Grid/filters)
+    ======================== */
+.browse-container {
+    padding: 2rem 5%;
+    width: 100;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-pill {
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    border: none;
+    padding: 0.5 rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-pill:hover, .filter-pill.active {
+    background-color: var(--text-primary);
+    color: var(--bg-primary)
+}
+
+.album-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+/* card styling */
+.album-card{
+    background-color: #181818;
+    padding:1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.album-card:hover {
+    background-color: var(--bg-primary);
+}
+
+/* --- Image & Play Button Wrapper --- */
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio:  1/1;
+    margin-bottom: 1rem;
+    box-shadow: 0 9px 24px rgba(0, 0, 0, 0.5);
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/*-- hidden play button --*/
+.play-btn {
+position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--accent-green);
+    color: black;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    
+    /* Animation defaults */
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 8px rgba(0,0,0,0.3);
+}
+
+/* show button when hovering over the whole card */
+.album-card:hover .play-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.play-btn:hover {
+    transform: scale(1.05);
+    background-color: #1ed760;
+}
+
+.card-text .album-title {
+    margin: 0 0 0 0.4rem 0;
+    font-size: 1rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-text .album-meta {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
