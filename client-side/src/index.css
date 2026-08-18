@@ -375,3 +375,52 @@ position: absolute;
 .submit-btn:hover {
     transform: scale(1.02);
 }
+/* =====================
+   8. ABOUT PAGE STYLES
+   ==================== */
+.about-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.about-panel {
+    width: 100%;
+    max-width: 700px;
+    text-align: left;
+}
+
+.team-grid {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.team-card {
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+}
+
+.team-card h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+}
+
+.team-card p {
+    margin: 0;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
