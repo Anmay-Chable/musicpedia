@@ -3,7 +3,7 @@
     --bg-surface: #282828;
     --text-primary: #ffffff;
     --text-secondary: #b3b3b3;
-    --accent-green: #1db954;
+    --accent-color: #9d4edd;
 }
 
 html, body {
@@ -40,7 +40,7 @@ html, body {
 }
 
 .top-nav a:hover {
-    color: var(--accent-green);
+    color: var(--accent-color);
 }
 
 /* --- 2. HERO/HOME SECTION --- */
@@ -232,7 +232,7 @@ position: absolute;
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background-color: var(--accent-green);
+    background-color: var(--accent-color);
     color: black;
     border: none;
     display: flex;
@@ -256,7 +256,7 @@ position: absolute;
 
 .play-btn:hover {
     transform: scale(1.05);
-    background-color: #1ed760;
+    background-color: #9d4edd;
 }
 
 .card-text .album-title {
@@ -275,4 +275,103 @@ position: absolute;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/* text area specific rule (entry details) */
+.textarea-input {
+    resize: vertical;
+    font-family: inherit;
+    min-height: 100px;
+}
+
+/* ===================
+    7. Entry Details Page Styles (wiki form)
+    ================== */
+.details-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.form-panel {
+    width: 100%;
+    max-width: 600px;
+    padding: 2.5rem 3rem; 
+}
+
+.details-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+    width: 100%;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.form-input {
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus {
+    border: 1px solid var(--accent-color);
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.row-group {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+}
+
+.half-width {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.textarea-input {
+    resize: vertical;
+    font-family: inherit;
+    min-height: 100px;
+}
+
+.submit-btn {
+    background-color: var(--accent-color);
+    color: #000;
+    border: none;
+    padding: 1rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(84, 29, 185, 0.352);
+    background-color: #9d4edd;
+}
+
+.submit-btn:hover {
+    transform: scale(1.02);
 }

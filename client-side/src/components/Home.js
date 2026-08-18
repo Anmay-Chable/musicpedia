@@ -4,7 +4,7 @@ function Home() {
     return (
         <main className="hero-section">
 
-            {/* The Horizontal 3D Album Stack */}
+            {/* The Horizontal 3D Album Stack (TEMP)*/}
             <div className="album-stack">
                 <img 
                     src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500" 

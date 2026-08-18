@@ -17,7 +17,7 @@ function Browse() {
             artist: "DJ Apollo",
             genre: "Live Set",
             year: "2023",
-            coverUrl: "https://images.unsplash.com/photo-1493225457124-a1a2a5956093?w=500"
+            coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500"
         },
         {
             id: 3,
@@ -25,7 +25,7 @@ function Browse() {
             artist: "The String Quartet",
             genre: "Alternative",
             year: "2022",
-            coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500"
+            coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500" 
         }
     ]);
 
