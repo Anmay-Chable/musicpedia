@@ -90,12 +90,17 @@ exports.updateAlbum = async (req, res) => {
             return res.status(404).json({ message: 'Album not found' });
         }
 
-        const updated = { ...albums[index], ...req.body, id: albums[index].id };
+        const original = albums[index];
+        const updated = { ...original, ...req.body, id: original.id };
 
-        // Backfill a cover if this album doesn't have one yet
-        if (!updated.coverUrl) {
+        const titleChanged = updated.title !== original.title;
+        const artistChanged = updated.artist !== original.artist;
+
+        // Refresh the cover if there isn't one yet, or if the title/artist
+        // changed enough that the old cover may no longer match
+        if (!updated.coverUrl || titleChanged || artistChanged) {
             const coverUrl = await fetchCoverArt(updated.title, updated.artist);
-            if (coverUrl) updated.coverUrl = coverUrl;
+            updated.coverUrl = coverUrl || '';
         }
 
         albums[index] = updated;

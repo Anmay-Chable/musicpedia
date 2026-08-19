@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import AlbumDetailModal from "./AlbumDetailModal";
+import { IconMusic } from "@tabler/icons-react";
 
 const GENRES = ['All', 'Rock', 'Hip-Hop', 'Pop', 'Electronic'];
 
@@ -13,6 +15,7 @@ function Browse() {
     const [error, setError] = useState(null);
     const [activeGenre, setActiveGenre] = useState('All');
     const [searchTerm, setSearchTerm] = useState(initialSearch);
+    const [selectedAlbum, setSelectedAlbum] = useState(null);
 
     const fetchAlbums = useCallback(async () => {
         setLoading(true);
@@ -92,13 +95,13 @@ function Browse() {
             {/* Dynamic Album Grid */}
             <div className="album-grid">
                 {albums.map((album) => (
-                    <article key={album.id} className="album-card">
+                    <article key={album.id} className="album-card" onClick={() => setSelectedAlbum(album)}>
                         <div className="image-wrapper">
                             {album.coverUrl ? (
                                 <img src={album.coverUrl} alt={`${album.title} Cover`} />
                             ) : (
                                 <div className="cover-placeholder">
-                                    <span>&#127925</span>
+                                    <IconMusic size={40} color="var(--accent-color)" stroke={1.5} />
                                 </div>
                             )}
                         </div>
@@ -119,6 +122,8 @@ function Browse() {
                     </article>
                 ))}
             </div>
+
+            <AlbumDetailModal album={selectedAlbum} onClose={() => setSelectedAlbum(null)} />
         </main>
     );
 }

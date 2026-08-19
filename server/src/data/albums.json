@@ -46,5 +46,28 @@
     "backgroundInfo": "",
     "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/84/e8/53/84e85340-3e7e-8e7c-a012-c54208fa1850/20UM1IM05906.rgb.jpg/600x600bb.jpg",
     "createdAt": "2026-08-19T07:34:03.044Z"
+  },
+  {
+    "id": "6bbfa3b2-1d69-478f-bf1e-ab15f74cc66e",
+    "title": "Kuyogen",
+    "artist": "Abo",
+    "genre": "abc",
+    "year": 10,
+    "label": "",
+    "producer": "",
+    "backgroundInfo": "This is an example of when the iTunes API cannot find a single/album that matches the single/album title and artist",
+    "createdAt": "2026-08-19T09:02:23.819Z"
+  },
+  {
+    "id": "ad1d202f-5cec-42e4-86e1-c094530b9980",
+    "title": "Monster",
+    "artist": "YOASOBI",
+    "genre": "Pop",
+    "year": 2021,
+    "label": "Sony Japan",
+    "producer": "Ayase",
+    "backgroundInfo": "Test",
+    "createdAt": "2026-08-19T09:32:50.281Z",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/9e/ab/2c/9eab2c24-8289-1bd7-548d-e6b871fcf169/195497732630.jpg/600x600bb.jpg"
   }
 ]
