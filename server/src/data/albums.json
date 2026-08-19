@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1cd740e6-a367-4745-8116-787cdde2a667",
+    "title": "Kyougen",
+    "artist": "Ado",
+    "genre": "Pop",
+    "year": "2020",
+    "label": "Virgin",
+    "producer": "Three, TeddyLoid, Kanaria, Jon-Yakitory, Whale Don't Sleep, Mewhan, Mikito P, Hiiragi Kirai, Teniwoha, Neru, Mafumafu, Syudou, Nilfruits, Ine, Biz",
+    "backgroundInfo": "Weekly Chart Performance 2022 -\nJapanese Albums (Oricon): 1\nJapanese Combined Albums (Oricon): 1\nJapanese Hot Albums (Billboard Japan): 1\n---------------------------------------------\nCertification -\nJapan (RIAJ): Platinum\n---------------------------------------------\nThe album was also the first to sell over 100,000 copies in Japan during its first week by a female artist since Superfly's 2008 self titled debut album.",
+    "createdAt": "2026-08-19T05:37:36.433Z",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/24/e9/c2/24e9c269-bee0-62e0-6de6-257db163ee5a/21UM1IM54074.rgb.jpg/600x600bb.jpg"
+  },
+  {
+    "id": "2329d883-e69a-4362-b425-d73f5cae3585",
+    "title": "Gira Gira",
+    "artist": "Ado",
+    "genre": "Pop",
+    "year": 2021,
+    "label": "Virgin",
+    "producer": "Teniwoha",
+    "backgroundInfo": "",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/2b/fc/69/2bfc69c8-1c1b-2b1c-6a52-2d5d610a9ce8/21UMGIM02074.rgb.jpg/600x600bb.jpg",
+    "createdAt": "2026-08-19T07:30:02.461Z"
+  },
+  {
+    "id": "2d0cf248-c117-4343-98cb-58019c92a1c3",
+    "title": "Usseewa",
+    "artist": "Ado",
+    "genre": "Rock",
+    "year": 2020,
+    "label": "Virgin",
+    "producer": "Virgin",
+    "backgroundInfo": "",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/cb/82/41/cb8241a3-5324-bbaa-8da2-33c5b29b1c7d/20UMGIM76771.rgb.jpg/600x600bb.jpg",
+    "createdAt": "2026-08-19T07:31:20.761Z"
+  },
+  {
+    "id": "828aac63-74e8-49df-a6aa-c7f6edea4b73",
+    "title": "Readymade",
+    "artist": "Ado",
+    "genre": "Pop",
+    "year": 2020,
+    "label": "Virgin",
+    "producer": "Surii",
+    "backgroundInfo": "",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/84/e8/53/84e85340-3e7e-8e7c-a012-c54208fa1850/20UM1IM05906.rgb.jpg/600x600bb.jpg",
+    "createdAt": "2026-08-19T07:34:03.044Z"
+  }
+]

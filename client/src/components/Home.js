@@ -1,6 +1,20 @@
-import React from 'react';
+// Original: import React from 'react';
+// Below added by Brendan ------------------------
+import React, { useState } from 'react';        //
+import { useNavigate } from 'react-router-dom'; //
+// -----------------------------------------------
 
 function Home() {
+    // Below added by Brendan ----------------------------------
+    const [query, setQuery] = useState('');                   //
+    const navigate = useNavigate();                           //
+    const handleSubmit = (e) => {                             //
+        e.preventDefault();                                   //
+        const params = new URLSearchParams();                 //
+        if (query.trim()) params.set('search', query.trim()); //
+        navigate(`/browse?${params.toString()}`);             //
+    };                                                        //
+    // ---------------------------------------------------------
     return (
         <main className="hero-section">
 
@@ -26,13 +40,20 @@ function Home() {
             {/* Glass Panel */}
             <div className="glass-panel">
                 <h1 className="logo-title">Welcome to Musicpedia</h1>
-                <form className="search-form" action="/browse">
+                {/* <form className="search-form" action="/browse"> */}
+                {/* Below added by Brendan ----------------------------------- */}
+                    <form className="search-form" onSubmit={handleSubmit}> {/* */}
+                {/* ---------------------------------------------------------- */}
                     <span className="search-icon">&#128269;</span>
                     <input 
                         type="text" 
                         placeholder="Search for music..." 
                         className="search-input" 
                         name="search" 
+                        // Below added by Brendan -------------------
+                        value={query}                              //
+                        onChange={(e) => setQuery(e.target.value)} //
+                        // ------------------------------------------
                     />
                 </form>
             </div>

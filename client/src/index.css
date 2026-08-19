@@ -277,6 +277,45 @@ position: absolute;
     text-overflow: ellipsis;
 }
 
+/* Section added by Brendan - Feel free to rearrange and change the specifics each part */
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.edit-btn, .delete-btn {
+    flex: 1;
+    padding: 0.4rem 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.edit-btn {
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color)
+}
+
+.edit-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-primary);
+}
+
+.delete-btn {
+    background-color: transparent;
+    border: 1px solid #e05252;
+    color: #e05252;
+}
+
+.delete-btn:hover {
+    background-color: #e05252;
+    color: var(--bg-primary);
+}
+
 /* text area specific rule (entry details) */
 .textarea-input {
     resize: vertical;

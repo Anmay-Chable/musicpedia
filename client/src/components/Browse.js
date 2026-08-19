@@ -1,58 +1,120 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useCallback } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
+
+const GENRES = ['All', 'Rock', 'Hip-Hop', 'Pop', 'Electronic'];
 
 function Browse() {
-    // Temporary state to hold placeholder data
-    const [albums, setAlbums] = useState([
-        {
-            id: 1,
-            title: "Neon Nights",
-            artist: "Synthwave Collective",
-            genre: "Electronic",
-            year: "2024",
-            coverUrl: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=500"
-        },
-        {
-            id: 2,
-            title: "The DJ Sessions",
-            artist: "DJ Apollo",
-            genre: "Live Set",
-            year: "2023",
-            coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500"
-        },
-        {
-            id: 3,
-            title: "Midnight Acoustics",
-            artist: "The String Quartet",
-            genre: "Alternative",
-            year: "2022",
-            coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500" 
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
+    const initialSearch = searchParams.get('search') || '';
+
+    const [albums, setAlbums] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [activeGenre, setActiveGenre] = useState('All');
+    const [searchTerm, setSearchTerm] = useState(initialSearch);
+
+    const fetchAlbums = useCallback(async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const params = new URLSearchParams();
+            if (activeGenre !== 'All') params.set('genre', activeGenre);
+            if (searchTerm) params.set('search', searchTerm);
+
+            const res = await fetch(`/api/albums?${params.toString()}`);
+            if (!res.ok) throw new Error('Failed to load albums');
+            const data = await res.json();
+            setAlbums(data);
         }
-    ]);
+        catch (err) {
+            setError(err.message);
+        }
+        finally {
+            setLoading(false);
+        }
+    }, [activeGenre, searchTerm]);
+
+    useEffect(() => {
+        fetchAlbums();
+    }, [fetchAlbums]);
+
+    const handleDelete = async (e, albumId, albumTitle) => {
+        e.stopPropagation();
+        const confirmed = window.confirm(`Delete "${albumTitle}"? This can't be undone.`);
+        if (!confirmed) return;
+        try {
+            const res = await fetch(`/api/albums/${albumId}`, { method: 'DELETE' });
+            if (!res.ok) throw new Error('Failed to delete album');
+            setAlbums((prev) => prev.filter((a) => a.id !== albumId));
+        }
+        catch (err) {
+            alert(err.message);
+        }
+    };
+
+    const handleEdit = (e, albumId) => {
+        e.stopPropagation();
+        navigate(`/edit/${albumId}`);
+    };
 
     return (
         <main className="browse-container">
             {/* Category Filters */}
             <div className="browse-header">
                 <div className="filters">
-                    <button className="filter-pill active">All</button>
-                    <button className="filter-pill">Rock</button>
-                    <button className="filter-pill">Hip-Hop</button>
-                    <button className="filter-pill">Pop</button>
-                    <button className="filter-pill">Electronic</button>
+                    {GENRES.map((genre) => (
+                        <button
+                            key={genre}
+                            className={`filter-pill ${activeGenre === genre ? 'active' : ''}`}
+                            onClick={() => setActiveGenre(genre)}
+                        >
+                            {genre}
+                        </button>
+                    ))}
                 </div>
+                
+                <input
+                    type="text"
+                    className="search-input"
+                    placeholder="Search within results..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
             </div>
+
+            {loading && <p className="browse-status">Loading albums...</p>}
+            {error && <p className="browse-status browse-error">{error}</p>}
+            {!loading && !error && albums.length === 0 && (
+                <p className="browse-status">No albums found. Try a different filter or search.</p>
+            )}
 
             {/* Dynamic Album Grid */}
             <div className="album-grid">
                 {albums.map((album) => (
                     <article key={album.id} className="album-card">
                         <div className="image-wrapper">
-                            <img src={album.coverUrl} alt={`${album.title} Cover`} />
-                            <button className="play-btn">&#9654;</button> 
+                            {album.coverUrl ? (
+                                <img src={album.coverUrl} alt={`${album.title} Cover`} />
+                            ) : (
+                                <div className="cover-placeholder">
+                                    <span>&#127925</span>
+                                </div>
+                            )}
                         </div>
                         <div className="card-text">
                             <h3 className="album-title">{album.title}</h3>
-                            <p className="album-meta">{album.artist} • {album.genre} • {album.year}</p>
+                            <p className="album-meta">
+                                {album.artist} • {album.genre || 'Unknown genre'} • {album.year || 'N/A'}
+                            </p>
+                            <div className="card-actions">
+                                <button className="edit-btn" onClick={(e) => handleEdit(e, album.id)}>
+                                    Edit
+                                </button>
+                                <button className="delete-btn" onClick={(e) => handleDelete(e, album.id, album.title)}>
+                                    Delete
+                                </button>
+                            </div>
                         </div>
                     </article>
                 ))}
