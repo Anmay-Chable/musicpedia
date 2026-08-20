@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const { readAlbums, writeAlbums } = require('../utils/dataStore');
-const { fetchCoverArt } =  require('../utils/coverArt');
+const { fetchAlbumMedia } =  require('../utils/coverArt');
 
 // GET /api/albums
 // Supports ?genre=Rock (Browse page filter pills) and ?search=query (Home page search bar)
@@ -55,7 +55,7 @@ exports.createAlbum = async (req, res) => {
         }
 
         const albums = await readAlbums();
-        const coverUrl = await fetchCoverArt(title, artist);
+        const { coverUrl, previewUrl } = await fetchAlbumMedia(title, artist);
 
         const newAlbum = {
             id: crypto.randomUUID(),
@@ -67,6 +67,7 @@ exports.createAlbum = async (req, res) => {
             producer: producer || '',
             backgroundInfo: backgroundInfo || '',
             coverUrl: coverUrl || '',
+            previewUrl: previewUrl || '',
             createdAt: new Date().toISOString(),
         };
 
@@ -96,11 +97,12 @@ exports.updateAlbum = async (req, res) => {
         const titleChanged = updated.title !== original.title;
         const artistChanged = updated.artist !== original.artist;
 
-        // Refresh the cover if there isn't one yet, or if the title/artist
-        // changed enough that the old cover may no longer match
-        if (!updated.coverUrl || titleChanged || artistChanged) {
-            const coverUrl = await fetchCoverArt(updated.title, updated.artist);
-            updated.coverUrl = coverUrl || '';
+        // Refresh the cover/preview if either is missing, or if the title/artist
+        // changed enough that the old media may no longer match
+        if (!updated.coverUrl || !updated.previewUrl || titleChanged || artistChanged) {
+            const { coverUrl, previewUrl } = await fetchAlbumMedia(updated.title, updated.artist);
+            updated.coverUrl = coverUrl || updated.coverUrl || '';
+            updated.previewUrl = previewUrl || updated.previewUrl || '';
         }
 
         albums[index] = updated;

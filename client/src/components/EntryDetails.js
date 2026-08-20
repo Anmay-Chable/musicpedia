@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { GENRES } from '../Constants';
 
 function EntryDetails (){
     const navigate = useNavigate();
     const { id } = useParams();
     const isEditMode = Boolean(id);
+
     const [submitting, setSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState(null);
     const [loading, setLoading] = useState(isEditMode);
+    const [useOtherGenre, setUseOtherGenre] = useState(false);
 
     // state management
     const [formData, setFormData] = useState({
@@ -20,18 +23,10 @@ function EntryDetails (){
         backgroundInfo: ''
     });
 
-    // auto updates, whenever a user types in a field
-    const handleChange = (e) =>{
-        const {name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]:value
-        }));
-    };
-
     // If we're editing an existing album, load its data into the form
     useEffect(() => {
         if (!isEditMode) return;
+
         const loadAlbum = async () => {
             try {
                 const res = await fetch(`/api/albums/${id}`);
@@ -57,28 +52,55 @@ function EntryDetails (){
         loadAlbum();
     }, [id, isEditMode]);
 
+    // auto updates, whenever a user types in a field
+    const handleChange = (e) => {
+        const {name, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]:value
+        }));
+    };
+
+    // genre <select> has its own handler since choosing "Other" needs to
+    // reveal a free-text input instead of directly setting formData.genre
+    const handleGenreSelect = (e) => {
+        const value = e.target.value;
+        if (value === 'Other') {
+            setUseOtherGenre(true);
+            setFormData((prev) => ({ ...prev, genre: '' }));
+        }
+        else {
+            setUseOtherGenre(false);
+            setFormData((prev) => ({ ...prev, genre: value }));
+        }
+    };
+
     //the submit handler
     const handleSubmit = async (e) => {
         e.preventDefault(); // stops the page from reloading
-        // console.log("express Api ready: ", formData);
-
         setSubmitting(true);
         setSubmitError(null);
+
         try {
             const res = await fetch(isEditMode ? `/api/albums/${id}` : '/api/albums', {
                 method: isEditMode ? 'PUT' : 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
+
             if (!res.ok) {
                 const errData = await res.json().catch(() => ({}));
                 throw new Error(errData.message || `Failed to ${isEditMode ? 'update' : 'publish'} entry`);
             }
-            if (!isEditMode) {
-                setFormData({ title: '', artist: '', genre: '', year: '', label: '', producer: '', backgroundInfo: '' });
-            }
-            alert(isEditMode ? 'Album updated' : "Success");
-            navigate('/browse');
+
+            //if (!isEditMode) {
+            //    setFormData({ title: '', artist: '', genre: '', year: '', label: '', producer: '', backgroundInfo: '' });
+            //}
+            //alert(isEditMode ? 'Album updated' : "Success");
+            
+            navigate('/browse', {
+                state: { toastMessage: isEditMode ? 'Album updated' : 'Album published' },
+            });
         }
         catch (err) {
             setSubmitError(err.message);
@@ -139,7 +161,16 @@ function EntryDetails (){
                     <div className="form-group row-group">
                         <div className="half-width">
                             <label htmlFor="genre">Genre</label>
-                            <input type="text" id="genre" name="genre" value={formData.genre} onChange={handleChange} required className="form-input" />
+                            <select id='genre' name='genre' value={useOtherGenre ? 'Other' : formData.genre} onChange={handleGenreSelect} className='form-input' required>
+                                <option value="" disabled>Select a genre</option>
+                                {GENRES.map((g) => (
+                                    <option key={g} value={g}>{g}</option>
+                                ))}
+                                <option value="Other">Other</option>
+                            </select>
+                            {useOtherGenre && (
+                                <input type="text" name="genre" value={formData.genre} onChange={handleChange} placeholder='Enter genre' className="form-input" style={{ marginTop: '0.5rem' }} required />
+                            )}
                         </div>
                         <div className="half-width">
                             <label htmlFor="year">Release Year</label>
