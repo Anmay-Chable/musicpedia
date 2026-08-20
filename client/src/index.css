@@ -205,7 +205,7 @@ html, body {
 }
 
 .album-card:hover {
-    background-color: var(--bg-primary);
+    background-color: var(--bg-surface);
 }
 
 /* --- Image & Play Button Wrapper --- */
@@ -276,6 +276,336 @@ position: absolute;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+/* Section added by Brendan - Feel free to rearrange and change the specifics each part */
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.edit-btn, .delete-btn {
+    flex: 1;
+    padding: 0.4rem 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.edit-btn {
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color)
+}
+
+.edit-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-primary);
+}
+
+.delete-btn {
+    background-color: transparent;
+    border: 1px solid #e05252;
+    color: #e05252;
+}
+
+.delete-btn:hover {
+    background-color: #e05252;
+    color: var(--bg-primary);
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1.5rem;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.5rem;
+    max-width: 700px;
+    width:  100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: var(--accent-color);
+}
+
+.modal-cover {
+    flex-shrink: 0;
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.modal-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cover-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.cover-placeholder.large {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.modal-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.modal-title {
+    margin: 0 0 0.25rem 0;
+}
+
+.modal-subtitle {
+    color: var(--text-secondary);
+    margin: 0 0 1.25rem 0;
+}
+
+.modal-details {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.35rem 1rem;
+    margin: 0 0 1.25rem 0;
+}
+
+.modal-details dt {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.modal-details dd {
+    margin: 0;
+}
+
+.modal-section-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+}
+
+.modal-background {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        flex-direction: column;
+    }
+    .modal-cover {
+        width: 100%;
+        height: 220px;
+    }
+}
+
+.browse-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.browse-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.sort-select {
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.browse-status {
+    color: var(--text-secondary);
+    margin: 2rem 0;
+}
+
+.browse-error {
+    color: #e05252;
+}
+
+.modal-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 0 0.25rem 0;
+}
+
+.modal-play-btn {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 0.35rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.modal-play-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-primary);
+}
+
+.modal-related {
+    margin-top: 1.5rem;
+}
+
+.modal-related-list {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+}
+
+.modal-related-item {
+    flex-shrink: 0;
+    width: 90px;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+}
+
+.modal-related-item img,
+.modal-related-item .cover-placeholder {
+    width: 90px;
+    height: 90px;
+    border-radius: 6px;
+    object-fit: cover;
+    margin-bottom: 0.35rem;
+}
+
+.modal-related-item span {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.confirm-title {
+    margin: 0 0 0.5rem 0;
+}
+
+.confirm-message {
+    color: var(--text-secondary);
+    margin: 0 0 1.5rem 0;
+    line-height: 1.5;
+}
+
+.confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.confirm-cancel {
+    background-color: transparent;
+    border: 1px solid var(--text-secondary);
+    color: var(--text-primary);
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.confirm-confirm {
+    background-color: var(--accent-color);
+    border: none;
+    color: var(--bg-primary);
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.confirm-confirm.danger {
+    background-color: #e05252;
+}
+
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    padding: 0.85rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toast-error {
+    border-color: #e05252;
+    color: #e05252;
+}
+/* End of section */
 
 /* text area specific rule (entry details) */
 .textarea-input {
@@ -423,4 +753,10 @@ position: absolute;
     color: var(--accent-color);
     font-size: 0.9rem;
     font-weight: 600;
+}
+
+/*genre dropdown made darker*/
+select option {
+    background-color: #181818;
+    color: #ffffff;
 }

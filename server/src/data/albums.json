@@ -1,0 +1,93 @@
+[
+  {
+    "id": "1cd740e6-a367-4745-8116-787cdde2a667",
+    "title": "Kyougen",
+    "artist": "Ado",
+    "genre": "Pop",
+    "year": "2020",
+    "label": "Virgin",
+    "producer": "Three, TeddyLoid, Kanaria, Jon-Yakitory, Whale Don't Sleep, Mewhan, Mikito P, Hiiragi Kirai, Teniwoha, Neru, Mafumafu, Syudou, Nilfruits, Ine, Biz",
+    "backgroundInfo": "Weekly Chart Performance 2022 -\nJapanese Albums (Oricon): 1\nJapanese Combined Albums (Oricon): 1\nJapanese Hot Albums (Billboard Japan): 1\n---------------------------------------------\nCertification -\nJapan (RIAJ): Platinum\n---------------------------------------------\nThe album was also the first to sell over 100,000 copies in Japan during its first week by a female artist since Superfly's 2008 self titled debut album.",
+    "createdAt": "2026-08-19T05:37:36.433Z",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/24/e9/c2/24e9c269-bee0-62e0-6de6-257db163ee5a/21UM1IM54074.rgb.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d3/dd/6b/d3dd6bb8-421f-7f03-6252-d4fc09548c76/mzaf_8194396506394272122.plus.aac.p.m4a"
+  },
+  {
+    "id": "2329d883-e69a-4362-b425-d73f5cae3585",
+    "title": "Gira Gira",
+    "artist": "Ado",
+    "genre": "Pop",
+    "year": 2021,
+    "label": "Virgin",
+    "producer": "Teniwoha",
+    "backgroundInfo": "Single Proof 1",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/2b/fc/69/2bfc69c8-1c1b-2b1c-6a52-2d5d610a9ce8/21UMGIM02074.rgb.jpg/600x600bb.jpg",
+    "createdAt": "2026-08-19T07:30:02.461Z",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/0f/11/d7/0f11d793-a669-d5eb-7afb-2fcf54ec5239/mzaf_10784059055061717466.plus.aac.p.m4a"
+  },
+  {
+    "id": "2d0cf248-c117-4343-98cb-58019c92a1c3",
+    "title": "Usseewa",
+    "artist": "Ado",
+    "genre": "Rock",
+    "year": 2020,
+    "label": "Virgin",
+    "producer": "Virgin",
+    "backgroundInfo": "Single Proof 2",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/cb/82/41/cb8241a3-5324-bbaa-8da2-33c5b29b1c7d/20UMGIM76771.rgb.jpg/600x600bb.jpg",
+    "createdAt": "2026-08-19T07:31:20.761Z",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/0c/8d/33/0c8d339b-db50-ce5a-8f20-bdbec6df3f6c/mzaf_10409401370931580642.plus.aac.p.m4a"
+  },
+  {
+    "id": "828aac63-74e8-49df-a6aa-c7f6edea4b73",
+    "title": "Readymade",
+    "artist": "Ado",
+    "genre": "Pop",
+    "year": 2020,
+    "label": "Virgin",
+    "producer": "Surii",
+    "backgroundInfo": "Single Proof 3",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/84/e8/53/84e85340-3e7e-8e7c-a012-c54208fa1850/20UM1IM05906.rgb.jpg/600x600bb.jpg",
+    "createdAt": "2026-08-19T07:34:03.044Z",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d4/58/3c/d4583c99-7745-5d0c-cf93-0c8ccb9bc565/mzaf_4145991785488590313.plus.aac.p.m4a"
+  },
+  {
+    "id": "6bbfa3b2-1d69-478f-bf1e-ab15f74cc66e",
+    "title": "Kuyogen",
+    "artist": "Abo",
+    "genre": "abc",
+    "year": 10,
+    "label": "",
+    "producer": "",
+    "backgroundInfo": "This is an example of when the iTunes API cannot find a single/album that matches the single/album title",
+    "createdAt": "2026-08-19T09:02:23.819Z",
+    "coverUrl": "",
+    "previewUrl": ""
+  },
+  {
+    "id": "ad1d202f-5cec-42e4-86e1-c094530b9980",
+    "title": "Monster",
+    "artist": "YOASOBI",
+    "genre": "Pop",
+    "year": 2021,
+    "label": "Sony Japan",
+    "producer": "Ayase",
+    "backgroundInfo": "Test using new code",
+    "createdAt": "2026-08-19T09:32:50.281Z",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/9e/ab/2c/9eab2c24-8289-1bd7-548d-e6b871fcf169/195497732630.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ed/35/8f/ed358f20-baf2-7b27-d1e5-eeb9fa4f4498/mzaf_2838285223197932486.plus.aac.p.m4a"
+  },
+  {
+    "id": "f908d4c9-66ce-4212-b97e-eb918d1cdff8",
+    "title": "Teatro d'Ira - Vol. I",
+    "artist": "Måneskin",
+    "genre": "Rock",
+    "year": 2021,
+    "label": "",
+    "producer": "",
+    "backgroundInfo": "Test for using special characters, such as å, to the artist",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/4b/1a/72/4b1a7220-bee2-8664-7153-adffa8d3df1e/886449063819.jpg/600x600bb.jpg",
+    "createdAt": "2026-08-20T06:30:26.841Z",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/0c/01/fe/0c01fee0-dba9-7e92-8fb7-020a216a693d/mzaf_14535768332441163296.plus.aac.p.m4a"
+  }
+]
