@@ -754,3 +754,9 @@ position: absolute;
     font-size: 0.9rem;
     font-weight: 600;
 }
+
+/*genre dropdown made darker*/
+select option {
+    background-color: #181818;
+    color: #ffffff;
+}
