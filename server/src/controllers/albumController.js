@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const { readAlbums, writeAlbums } = require('../utils/dataStore');
-const { fetchAlbumMedia } =  require('../utils/coverArt');
+const { fetchAlbumMedia, fetchTracklist } =  require('../utils/coverArt');
 
 // GET /api/albums
 // Supports ?genre=Rock (Browse page filter pills) and ?search=query (Home page search bar)
@@ -55,7 +55,7 @@ exports.createAlbum = async (req, res) => {
         }
 
         const albums = await readAlbums();
-        const { coverUrl, previewUrl } = await fetchAlbumMedia(title, artist);
+        const { coverUrl, previewUrl, collectionId } = await fetchAlbumMedia(title, artist);
 
         const newAlbum = {
             id: crypto.randomUUID(),
@@ -68,6 +68,7 @@ exports.createAlbum = async (req, res) => {
             backgroundInfo: backgroundInfo || '',
             coverUrl: coverUrl || '',
             previewUrl: previewUrl || '',
+            collectionId: collectionId || null,
             createdAt: new Date().toISOString(),
         };
 
@@ -99,10 +100,11 @@ exports.updateAlbum = async (req, res) => {
 
         // Refresh the cover/preview if either is missing, or if the title/artist
         // changed enough that the old media may no longer match
-        if (!updated.coverUrl || !updated.previewUrl || titleChanged || artistChanged) {
-            const { coverUrl, previewUrl } = await fetchAlbumMedia(updated.title, updated.artist);
-            updated.coverUrl = coverUrl || updated.coverUrl || '';
-            updated.previewUrl = previewUrl || updated.previewUrl || '';
+        if (!updated.coverUrl || !updated.previewUrl || !updated.collectionId || titleChanged || artistChanged) {
+            const { coverUrl, previewUrl, collectionId } = await fetchAlbumMedia(updated.title, updated.artist);
+            updated.coverUrl = coverUrl || '';
+            updated.previewUrl = previewUrl || '';
+            updated.collectionId = collectionId || null;
         }
 
         albums[index] = updated;
@@ -132,5 +134,25 @@ exports.deleteAlbum = async (req, res) => {
     }
     catch (err) {
         res.status(500).json({ message: 'Failed to delete album', error: err.message });
+    }
+};
+
+exports.getTracklist = async (req, res) => {
+    try {
+        const albums = await readAlbums();
+        const album = await albums.find((a) => a.id === req.params.id);
+
+        if (!album) {
+            return res.status(404).json({ message: 'Album not found' });
+        }
+        if (!album.collectionId) {
+            return res.json([]);
+        }
+
+        const tracklist = await fetchTracklist(album.collectionId);
+        res.json(tracklist);
+    }
+    catch (err) {
+        res.status(500).json({ message: 'Failed to fetch tracklist', error: err.message });
     }
 };

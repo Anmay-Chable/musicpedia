@@ -7,6 +7,8 @@ import ConfirmDialog from "./ConfirmDialog";
 import Toast from "./Toast";
 
 const FILTER_GENRES = ['All', ...GENRES];
+const RING_RADIUS = 21;
+const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
 
 function sortAlbums(list, sortBy) {
     const sorted = [...list];
@@ -42,6 +44,7 @@ function Browse() {
     const [confirmDelete, setConfirmDelete] = useState(null);
     const [toast, setToast] = useState(null);
     const [playingId, setPlayingId] = useState(null);
+    const [progress, setProgress] = useState(0);
 
     const audioRef = useRef(null);
 
@@ -129,6 +132,7 @@ function Browse() {
         if (playingId === album.id) {
             audioRef.current?.pause();
             setPlayingId(null);
+            setProgress(0);
             return;
         }
 
@@ -137,15 +141,23 @@ function Browse() {
         }
 
         const audio = new Audio(album.previewUrl);
-        audio.addEventListener('ended', () => setPlayingId(null));
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) setProgress(audio.currentTime / audio.duration)
+        });
+        audio.addEventListener('ended', () => {
+            setPlayingId(null);
+            setProgress(0);
+        })
         audio.addEventListener('error', () => {
             setPlayingId(null);
             setToast({ message: 'Preview unavailable for this track', type: 'error' });
         });
         audioRef.current = audio;
-        setPlayingId(album.id);
+        setProgress(0)
 
-        audio.play().catch(() => {
+        audio.play()
+            .then(() => setPlayingId(album.id))
+            .catch(() => {
             setPlayingId(null);
             setToast({ message: 'Preview unavailable for this track', type: 'error' });
         });
@@ -203,17 +215,32 @@ function Browse() {
                                 </div>
                             )}
                             {album.previewUrl && (
-                                <button
-                                    className="play-btn"
-                                    onClick={(e) => handlePlayToggle(e, album)}
-                                    aria-label={playingId === album.id ? 'Pause preview' : 'Play preview'}
-                                >
-                                    {playingId === album.id ? (
-                                        <IconPlayerPause size={20} stroke={2} />
-                                    ) : (
-                                        <IconPlayerPlay size={20} stroke={2} />
-                                    )}
-                                </button>
+                                <div className="play-btn-wrapper">
+                                    <svg className="play-progress-ring" viewBox="0 0 48 48">
+                                        <circle className="play-progress-track" cx="24" cy="24" r={RING_RADIUS} />
+                                        {playingId === album.id && (
+                                            <circle
+                                                className="play-progress-fill"
+                                                cx="24" cy="24" r={RING_RADIUS}
+                                                style={{
+                                                    strokeDasharray: RING_CIRCUMFERENCE,
+                                                    strokeDashoffset: RING_CIRCUMFERENCE * (1 - progress),
+                                                }}
+                                            />
+                                        )}
+                                    </svg>
+                                    <button
+                                        className="play-btn"
+                                        onClick={(e) => handlePlayToggle(e, album)}
+                                        aria-label={playingId === album.id ? 'Pause preview' : 'Play preview'}
+                                    >
+                                        {playingId === album.id ? (
+                                            <IconPlayerPause size={20} stroke={2} />
+                                        ) : (
+                                            <IconPlayerPlay size={20} stroke={2} />
+                                        )}
+                                    </button>
+                                </div>
                             )}
                         </div>
                         <div className="card-text">
@@ -240,6 +267,7 @@ function Browse() {
                 onSelectAlbum={(album) => setSelectedAlbum(album)}
                 playingId={playingId}
                 onPlayToggle={handlePlayToggle}
+                progress={progress}
             />
 
             <ConfirmDialog
