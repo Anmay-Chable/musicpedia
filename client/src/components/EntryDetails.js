@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GENRES } from '../Constants';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 function EntryDetails (){
     const navigate = useNavigate();
     const { id } = useParams();
     const isEditMode = Boolean(id);
+    useDocumentTitle(isEditMode ? 'Edit Album' : 'Add New Album');
 
     const [submitting, setSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState(null);
@@ -22,6 +24,8 @@ function EntryDetails (){
         producer: '',
         backgroundInfo: ''
     });
+
+    useDocumentTitle(isEditMode ? (formData.title || 'Edit Album') : 'Add New Album');
 
     // If we're editing an existing album, load its data into the form
     useEffect(() => {

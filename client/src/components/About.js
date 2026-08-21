@@ -1,6 +1,8 @@
 import React from 'react';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 function About() {
+    useDocumentTitle('About');
     return (
         <main className='about-container'>
             <div className='glass-panel about-panel'>
