@@ -5,15 +5,21 @@ import { useNavigate } from 'react-router-dom'; //
 // -----------------------------------------------
 
 function Home() {
+    const [isSearching, setIsSearching] = useState(false);
     // Below added by Brendan ----------------------------------
     const [query, setQuery] = useState('');                   //
     const navigate = useNavigate();                           //
     const handleSubmit = (e) => {                             //
-        e.preventDefault();                                   //
-        const params = new URLSearchParams();                 //
-        if (query.trim()) params.set('search', query.trim()); //
-        navigate(`/browse?${params.toString()}`);             //
-    };                                                        //
+        e.preventDefault(); 
+        
+        setIsSearching(true);
+        // helps with the loading screen timer
+        setTimeout(() => {
+            const params = new URLSearchParams();                 //
+            if (query.trim()) params.set('search', query.trim()); //
+            navigate(`/browse?${params.toString()}`);             //
+        }, 1500);
+};                                                           //
     // ---------------------------------------------------------
     return (
         <main className="hero-section">
@@ -39,7 +45,23 @@ function Home() {
             
             {/* Glass Panel */}
             <div className="glass-panel">
-                <h1 className="logo-title">Welcome to Musicpedia</h1>
+                {isSearching ? (
+                    <div className='search-loading-container'>
+                        <div className='equalizer'>
+                            <div className='bar bar1'></div>
+                            <div className='bar bar2'></div>
+                            <div className='bar bar3'></div>
+                            <div className='bar bar4'></div>
+                            <div className='bar bar5'></div>
+                        </div>
+                        <h3 className='loading-text'>Searching Musicpedia</h3>
+                    </div>
+                ):(
+                    <>
+                <div className='title-wrapper'>
+                    <span className='title-prefix'>THE OPEN MUSIC WIKI</span>
+                    <h1 className="logo-title gradient-brand">Musicpedia</h1>
+                </div>
                 {/* <form className="search-form" action="/browse"> */}
                 {/* Below added by Brendan ----------------------------------- */}
                     <form className="search-form" onSubmit={handleSubmit}> {/* */}
@@ -56,6 +78,8 @@ function Home() {
                         // ------------------------------------------
                     />
                 </form>
+                </>
+                )}
             </div>
 
         </main>
