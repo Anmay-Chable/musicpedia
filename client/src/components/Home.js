@@ -1,26 +1,24 @@
-// Original: import React from 'react';
-// Below added by Brendan ------------------------
-import React, { useState } from 'react';        //
-import { useNavigate } from 'react-router-dom'; //
-// -----------------------------------------------
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 function Home() {
+    useDocumentTitle('Home');
     const [isSearching, setIsSearching] = useState(false);
-    // Below added by Brendan ----------------------------------
-    const [query, setQuery] = useState('');                   //
-    const navigate = useNavigate();                           //
-    const handleSubmit = (e) => {                             //
+    const [query, setQuery] = useState('');
+    const navigate = useNavigate();
+    const handleSubmit = (e) => {
         e.preventDefault(); 
         
         setIsSearching(true);
         // helps with the loading screen timer
         setTimeout(() => {
-            const params = new URLSearchParams();                 //
-            if (query.trim()) params.set('search', query.trim()); //
-            navigate(`/browse?${params.toString()}`);             //
+            const params = new URLSearchParams();
+            if (query.trim()) params.set('search', query.trim());
+            navigate(`/browse?${params.toString()}`);
         }, 1500);
-};                                                           //
-    // ---------------------------------------------------------
+    };
+
     return (
         <main className="hero-section">
 

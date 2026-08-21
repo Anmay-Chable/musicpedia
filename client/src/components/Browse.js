@@ -5,6 +5,7 @@ import { GENRES } from "../Constants";
 import AlbumDetailModal from "./AlbumDetailModal";
 import ConfirmDialog from "./ConfirmDialog";
 import Toast from "./Toast";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const FILTER_GENRES = ['All', ...GENRES];
 const RING_RADIUS = 21;
@@ -27,6 +28,7 @@ function sortAlbums(list, sortBy) {
 }
 
 function Browse() {
+    useDocumentTitle('Browse');
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const location = useLocation();
