@@ -55,9 +55,47 @@ html, body {
 }
 
 .logo-title {
-    font-size: 3.5rem;
-    letter-spacing: -2px;
+    font-size: 4.5rem;
+    font-weight: 900;
     margin-bottom: 2rem;
+    margin: 0;
+
+    /* gradient that is wider than the tex*/
+    background: linear-gradient(
+        270deg,
+        #ffffff 0%,
+        var(--accent-color) 50%,
+        #ffffff 100%
+    );
+    background-size: 200% auto;
+
+    /* adding the background color direclty to the letters */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color:transparent;
+
+    /* trigger animation*/
+    animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+    0% { background-position: 200% center;}
+    100% {background-position: 0% center;}
+}
+
+.title-wrapper {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.title-prefix {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--text-secondary);
+    font-weight: 700;
+    display: block;
+    margin-bottom: -0.5rem;
 }
 
 /* --- 3. SEARCH BAR --- */
@@ -91,6 +129,7 @@ html, body {
     font-size: 1.1rem;
     outline: none;
 }
+
 
 /* --- 4. GLASS PANEL --- */
 .glass-panel {
@@ -139,20 +178,20 @@ html, body {
 }
 
 .album-left {
-    transform: translateX(-250px) scale(0.85); 
-    opacity: 0.6;
+    transform: translateX(-380px) scale(0.85); 
+    opacity: 0.5;
     z-index: 1;
 }
 
 .album-center {
-    transform: translateX(0) scale(1.1); 
-    opacity: 0.9;
+    transform: translateX(0) scale(1.15); 
+    opacity: 0.8;
     z-index: 3;
 }
 
 .album-right {
-    transform: translateX(250px) scale(0.85); 
-    opacity: 0.6;
+    transform: translateX(380px) scale(0.85); 
+    opacity: 0.5;
     z-index: 1;
 }
 
@@ -907,4 +946,55 @@ position: relative; /* was absolute */
 select option {
     background-color: #181818;
     color: #ffffff;
+}
+
+.search-loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    min-height: 150px;
+}
+
+.equalizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    height: 40px;
+    margin-bottom: 1.5rem;
+}
+
+.bar {
+    width: 6px;
+    background-color: var(--accent-color);
+    border-radius: 4px;
+    animation: bounce 1.2s infinite ease-in-out;
+    transform-origin: bottom;
+}
+/* Stagger the heights and animation times for a random music look */
+.bar1 { height: 15px; animation-delay: 0.0s; }
+.bar2 { height: 30px; animation-delay: 0.2s; }
+.bar3 { height: 40px; animation-delay: 0.4s; }
+.bar4 { height: 25px; animation-delay: 0.1s; }
+.bar5 { height: 20px; animation-delay: 0.3s; }
+
+@keyframes bounce {
+    0%, 100% { transform: scaleY(0.4); }
+    50% { transform: scaleY(1); }
+}
+
+.loading-text {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin: 0;
+    text-transform: uppercase;
+    animation: pulse-text 1.5s infinite;
+}
+
+@keyframes pulse-text {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
 }
