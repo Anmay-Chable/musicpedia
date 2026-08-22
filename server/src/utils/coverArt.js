@@ -1,5 +1,5 @@
 // Looks up album cover art via Apple's free iTunes Search API.
-async function fetchAlbumMedia(title, artist) {
+async function fetchAlbumMedia(title, artist, entryType = 'auto') {
     const empty = { coverUrl: '', previewUrl: '', collectionId: null };
 
     try {
@@ -9,8 +9,16 @@ async function fetchAlbumMedia(title, artist) {
 
         const coverUrl = match.artworkUrl100 ? match.artworkUrl100.replace('100x100bb', '600x600bb') : '';
 
+        if (entryType === 'song') {
+            return { coverUrl, previewUrl: match.previewUrl || '', collectionId: null };
+        }
+
         if (!match.collectionId) {
             return { coverUrl, previewUrl: match.previewUrl || '', collectionId: null };
+        }
+
+        if (entryType === 'album') {
+            return { coverUrl, previewUrl: '', collectionId: match.collectionId };
         }
 
         const collection = await lookupCollection(match.collectionId);

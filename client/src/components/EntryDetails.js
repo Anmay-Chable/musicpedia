@@ -22,7 +22,8 @@ function EntryDetails (){
         year: '',
         label: '',
         producer: '',
-        backgroundInfo: ''
+        backgroundInfo: '',
+        entryType: 'auto',
     });
 
     useDocumentTitle(isEditMode ? (formData.title || 'Edit Album') : 'Add New Album');
@@ -44,6 +45,7 @@ function EntryDetails (){
                     label: album.label || '',
                     producer: album.producer || '',
                     backgroundInfo: album.backgroundInfo || '',
+                    entryType: album.entryType || '',
                 });
             }
             catch (err) {
@@ -149,6 +151,33 @@ function EntryDetails (){
                         </div>
                     </div>
 
+                    <div className='form-group'>
+                        <label>Entry Type</label>
+                        <div className='entry-type-toggle'>
+                            <button
+                                type='button'
+                                className={formData.entryType === 'auto' ? 'active' : ''}
+                                onClick={() => setFormData((prev) => ({ ...prev, entryType: 'auto' }))}
+                            >
+                                Auto-Detect
+                            </button>
+                            <button
+                                type='button'
+                                className={formData.entryType === 'album' ? 'active' : ''}
+                                onClick={() => setFormData((prev) => ({ ...prev, entryType: 'album' }))}
+                            >
+                                Album
+                            </button>
+                            <button
+                                type='button'
+                                className={formData.entryType === 'song' ? 'active' : ''}
+                                onClick={() => setFormData((prev) => ({ ...prev, entryType: 'song' }))}
+                            >
+                                Song / Single
+                            </button>
+                        </div>
+                    </div>
+
                     {/* wiki-specific data row */}
                     <div className='form-group row-group'>
                         <div className="half-width">
@@ -195,7 +224,6 @@ function EntryDetails (){
                             placeholder="Detail the recording process, historical impact, or trivia..."
                         />
                     </div>
-                    {/* Original: <button type="submit" className="submit-btn">Publish Entry</button> */}
 
                     {submitError && <p className="form-error">{submitError}</p>}
                     <button type="submit" className="submit-btn" disabled={submitting}>

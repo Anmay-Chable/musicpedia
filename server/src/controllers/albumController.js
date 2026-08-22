@@ -48,14 +48,14 @@ exports.getAlbumById = async (req, res) => {
 // Handles the Publish Entry button on the Add New Album form
 exports.createAlbum = async (req, res) => {
     try {
-        const { title, artist, genre, year, label, producer, backgroundInfo } = req.body;
+        const { title, artist, genre, year, label, producer, backgroundInfo, entryType } = req.body;
 
         if (!title || !artist) {
             return res.status(400).json({ message: 'Album title and primary artist are required' });
         }
 
         const albums = await readAlbums();
-        const { coverUrl, previewUrl, collectionId } = await fetchAlbumMedia(title, artist);
+        const { coverUrl, previewUrl, collectionId } = await fetchAlbumMedia(title, artist, entryType);
 
         const newAlbum = {
             id: crypto.randomUUID(),
@@ -69,6 +69,7 @@ exports.createAlbum = async (req, res) => {
             coverUrl: coverUrl || '',
             previewUrl: previewUrl || '',
             collectionId: collectionId || null,
+            entryType: entryType || 'auto',
             createdAt: new Date().toISOString(),
         };
 
@@ -97,11 +98,14 @@ exports.updateAlbum = async (req, res) => {
 
         const titleChanged = updated.title !== original.title;
         const artistChanged = updated.artist !== original.artist;
+        const entryTypeChanged = updated.entryType !== original.entryType;
+        const neverClassified = !updated.previewUrl && !updated.collectionId
+        const invalidState = updated.entryType === 'song' && updated.collectionId !== null;
 
         // Refresh the cover/preview if either is missing, or if the title/artist
         // changed enough that the old media may no longer match
-        if (!updated.coverUrl || !updated.previewUrl || !updated.collectionId || titleChanged || artistChanged) {
-            const { coverUrl, previewUrl, collectionId } = await fetchAlbumMedia(updated.title, updated.artist);
+        if (!updated.coverUrl || titleChanged || artistChanged || entryTypeChanged || invalidState || neverClassified) {
+            const { coverUrl, previewUrl, collectionId } = await fetchAlbumMedia(updated.title, updated.artist, updated.entryType);
             updated.coverUrl = coverUrl || '';
             updated.previewUrl = previewUrl || '';
             updated.collectionId = collectionId || null;
